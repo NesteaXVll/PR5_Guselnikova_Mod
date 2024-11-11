@@ -20,6 +20,12 @@ namespace PR5_Guselnikova_Mod
 
             if (employee != null)
             {
+                if (employee.ID_Authorization != null)
+                {
+                    Console.WriteLine("Учетная запись для этого сотрудника уже существует!");
+                    return;
+                }
+
                 Console.Write("Введите логин: ");
                 string login = Console.ReadLine();
 
@@ -47,6 +53,14 @@ namespace PR5_Guselnikova_Mod
                 };
                 db.Authorization.Add(authorization);
                 db.SaveChanges();
+                employee.ID_Authorization = authorization.ID_Authorization;
+                db.SaveChanges();
+                Console.WriteLine("Учетная запись успешно добавлена!");
+            }
+
+            else
+            {
+                Console.WriteLine("Сотрудник не найден!");
             }
         }
     }
